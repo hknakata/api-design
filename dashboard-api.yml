@@ -1,0 +1,424 @@
+swagger: '2.0'
+info:
+  title: Dashboard API
+  description: Get data from WMS for dashboard apps / modules
+  version: "1.0.0"
+# the domain of the service
+host: virtserver.swaggerhub.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /hknakata/dashboard-api/1.0.0
+produces:
+  - application/json
+paths:
+  
+  /projects:
+    get:
+      summary: Return list of available projects
+      tags:
+        - "Projects"
+      responses:
+        200:
+          description: An array of projects. If empty, return a empty array i.e. [].
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Project'
+          examples:
+            application/json:
+              - name: "Calares"
+                code: "CALARES"
+              - name: "Spring Master"
+                code: "SM"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /dashboards:
+    get:
+      summary: Return list of available dashboard
+      tags: 
+        - Dashboard
+      responses:
+        200:
+          description: An array of dashboard. If empty, return a empty array i.e. [].
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Dashboard'
+          examples:
+            application/json:
+              - id: 1
+                name: "倉儲匯總"
+              - id: 2
+                name: "倉儲使用倉儲使用情況"
+              - id: 3
+                name: "倉儲分佈地圖"
+              - id: 4
+                name: "23號倉儲CCTV"
+              - id: 5
+                name: "當天入庫情況"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: '#/definitions/Error'
+
+  /dashboards/{id}/details:
+    get:
+      summary: Retrieve list of filters
+      tags:
+        - Dashboard
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the dashboard to retrieve data for
+          type: string
+      responses:
+        200:
+          description: An array of filters
+          schema:
+            type: object
+            properties:
+              filter:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key:
+                      type: string
+                    value:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          label:
+                            type: string
+                          value:
+                            type: string
+          examples:
+            application/json:
+              filter:
+                - key: "project"
+                  value:
+                    - label: "Calares"
+                      value: "CALARES"
+                    - label: "Spring Master"
+                      value: "SM"
+                - key: "month"
+                  value:
+                    - label: "January"
+                      value: "Jan"
+                    - label: "Feburary"
+                      value: "Feb"
+                    - label: "March"
+                      value: "Mar"
+                    - label: "April"
+                      value: "Apr"
+                    - label: "May"
+                      value: "May"
+                    - label: "June"
+                      value: "Jun"
+                    - label: "July"
+                      value: "Jul"
+                    - label: "August"
+                      value: "Aug"
+                    - label: "September"
+                      value: "Sep"
+                    - label: "October"
+                      value: "Oct"
+                    - label: "November"
+                      value: "Nov"
+                    - label: "December"
+                      value: "Dec"
+        404:
+          description: Not found
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+              
+  /dashboards/{id}/data:
+    get:
+      summary: Retrieve data for a specific dashboard
+      tags:
+        - Dashboard
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the dashboard to retrieve data for
+          type: string
+      responses:
+        200:
+          description: Data object
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  kpi:
+                    type: array
+                    items:
+                      $ref: '#/definitions/KPI'
+                  line:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Line'
+                  bar:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Bar'
+                  bars:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Bars'
+                  barStack:
+                    type: array
+                    items:
+                      $ref: '#/definitions/BarStack'
+                  pie:
+                    type: array
+                    items:
+                      $ref: '#/definitions/Pie'
+                  map:
+                    $ref: '#/definitions/Map'
+          examples:
+            application/json:
+              data:
+                kpi:
+                  - name: "倉庫數" 
+                    key: "totalNoOfWarehouse"
+                    value: "3"
+                  - name: "總CBM"
+                    key: "totalCBM"
+                    value: "23456"
+                barStack:
+                  - name: "空間佔有有最多項目"
+                    category:
+                      - "Jan"
+                      - "Feb"
+                      - "Mar"
+                      - "Apr"
+                      - "May"
+                      - "Jun"
+                      - "Jul"
+                      - "Aug"
+                      - "Sep"
+                      - "Oct"
+                      - "Nov"
+                      - "Dec"
+                    value:
+                      -
+                        - label: "Calares"
+                          data: 1000
+                        - label: "Spring Master"
+                          data: 200
+                      - 
+                        - label: "Calares"
+                          data: 2300
+                        - label: "Spring Master"
+                          data: 120
+                      - 
+                        - label: "Calares"
+                          data: 2000
+                        - label: "Spring Master"
+                          data: 110
+                      - 
+                        - label: "Calares"
+                          data: 3000
+                        - label: "Spring Master"
+                          data: 120
+                      - 
+                        - label: "Calares"
+                          data: 2800
+                        - label: "Spring Master"
+                          data: 150
+                      - 
+                        - label: "Calares"
+                          data: 2500
+                        - label: "Spring Master"
+                          data: 150
+                      - 
+                        - label: "Calares"
+                          data: 3300
+                        - label: "Spring Master"
+                          data: 200
+                      - 
+                        - label: "Calares"
+                          data: 4000
+                        - label: "Spring Master"
+                          data: 400
+                      - 
+                        - label: "Calares"
+                          data: 2000
+                        - label: "Spring Master"
+                          data: 120
+                      - 
+                        - label: "Calares"
+                          data: 2300
+                        - label: "Spring Master"
+                          data: 100
+                      - 
+                        - label: "Calares"
+                          data: 3000
+                        - label: "Spring Master"
+                          data: 300
+                      - 
+                        - label: "Calares"
+                          data: 4000
+                        - label: "Spring Master"
+                          data: 300
+        404:
+          description: Not Found
+
+definitions:
+
+  Project:
+    type: object
+    properties:
+      name: 
+        type: string
+      code:
+        type: string
+
+  Dashboard:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      name:
+        type: string
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        example: 500
+      message:
+        type: string
+        example: "Internal Error! Please contact adminstrator."
+
+  KPI:
+    type: object
+    properties:
+      name:
+        type: string
+      key:
+        type: string
+      value:
+        type: string
+  
+  Line:
+    type: object
+    properties:
+      name:
+        type: string
+      category:
+        type: array
+        items:
+          type: string
+      value:
+        type: array
+        items:
+          type: string
+          
+  Bar:
+    type: object
+    properties:
+      name:
+        type: string
+      category:
+        type: array
+        items:
+          type: string
+      value:
+        type: array
+        items:
+          type: string
+  
+  Bars:
+    type: object
+    properties:
+      name:
+        type: string
+      category:
+        type: array
+        items:
+          type: string
+      value:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            data:
+              type: array
+              items:
+                type: string
+
+  BarStack:
+    type: object
+    properties:
+      name:
+        type: string
+      category:
+        type: array
+        items:
+          type: string
+      value:
+        type: array
+        items:
+          type: object
+          properties:
+            label:
+              type: string
+            data:
+              type: number
+                
+  Pie:
+    type: object
+    properties:
+      name:
+        type: string
+      data:
+        type: array
+        items:
+          type: object
+          properties:
+            value:
+              type: string
+            name:
+              type: string
+              
+  Map:
+    type: object
+    properties:
+      coords:
+        type: array
+        items:
+          type: object
+          properties:
+            x:
+              type: number
+            y:
+              type: number
+            name:
+              type: string
+            data:
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
