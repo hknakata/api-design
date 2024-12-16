@@ -28,9 +28,9 @@ paths:
               $ref: '#/definitions/Project'
           examples:
             application/json:
-              - name: "Calares"
-                code: "CALARES"
-              - name: "Spring Master"
+              - name: "Caleres"
+                code: "CALERES"
+              - name: "Spin Master"
                 code: "SM"
         default:
           description: Unexpected error
@@ -104,9 +104,9 @@ paths:
               filter:
                 - key: "project"
                   value:
-                    - label: "Calares"
-                      value: "CALARES"
-                    - label: "Spring Master"
+                    - label: "Caleres"
+                      value: "CALERES"
+                    - label: "Spin Master"
                       value: "SM"
                 - key: "month"
                   value:
@@ -214,64 +214,64 @@ paths:
                       - "Dec"
                     value:
                       -
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 1000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 200
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 2300
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 120
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 2000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 110
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 3000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 120
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 2800
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 150
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 2500
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 150
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 3300
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 200
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 4000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 400
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 2000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 120
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 2300
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 100
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 3000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 300
                       - 
-                        - label: "Calares"
+                        - label: "Caleres"
                           data: 4000
-                        - label: "Spring Master"
+                        - label: "Spin Master"
                           data: 300
         404:
           description: Not Found
