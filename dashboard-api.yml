@@ -134,6 +134,15 @@ paths:
                       value: "Nov"
                     - label: "December"
                       value: "Dec"
+                - key: "video"
+                  value:
+                    - label: "W23 Location A"
+                      value: "http://127.0.0.1:1234/18901"
+                    - label: "W23 Location B"
+                      value: "http://127.0.0.1:1234/18902"
+                    - label: "W23 Location C"
+                      value: "http://127.0.0.1:1234/18903"
+
         404:
           description: Not found
         default:
@@ -275,6 +284,10 @@ paths:
                           data: 300
         404:
           description: Not Found
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
 
 definitions:
 
