@@ -161,6 +161,16 @@ paths:
           required: true
           description: The ID of the dashboard to retrieve data for
           type: string
+        - name: project
+          in: query
+          required: false
+          description: Project code to filter data
+          type: string
+        - name: month
+          in: query
+          required: false
+          description: Month code to filter data (e.g. Jan, Feb)
+          type: string
       responses:
         200:
           description: Data object
