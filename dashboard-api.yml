@@ -216,6 +216,9 @@ paths:
                   - name: "總CBM"
                     key: "totalCBM"
                     value: "23456"
+                  - name: "已使用倉庫空間"
+                    key: "usedCBM"
+                    value: "43.36%"
                 barStack:
                   - name: "空間佔有有最多項目"
                     category:
