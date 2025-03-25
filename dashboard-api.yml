@@ -171,6 +171,11 @@ paths:
           required: false
           description: Month code to filter data (e.g. Jan, Feb)
           type: string
+        - name: lang
+          in: query
+          required: false
+          description: Language to filter data (en, zh, zh-cn)
+          type: string
       responses:
         200:
           description: Data object
